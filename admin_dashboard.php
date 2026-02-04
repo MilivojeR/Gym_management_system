@@ -1,14 +1,11 @@
 <?php
 require_once 'config.php';
 
-echo "Welcome to the Admin Dashboard Saiyan";
-
-
 if(!isset($_SESSION['admin_id'])) {
-    header('Location: index.php');
+    header("Location: index.php");
     exit();
-
-}
+} 
+echo "Welcome to the Admin Dashboard!";
 
 
 ?>
@@ -18,7 +15,7 @@ if(!isset($_SESSION['admin_id'])) {
 <head>
     <title>Admin Dashboard</title>  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel=stylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" type="text/css">
+    <link rel=stylesheet href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css">
 </head>
 <body>
 
@@ -33,12 +30,9 @@ if(!isset($_SESSION['admin_id'])) {
                 Phone Number: <input class="form-control" type = "text" name="phone" required><br>
                 Training Plan:
                 <select class="form-control" name="training_plan_id" required>
-                    <?php
-                    foreach($training_plans as $plan): ?>
-                    <option value="<?= $plan['plan_id'] ?>">
-                        <?= $plan['plan_name'] ?>
-                    </option>
-                    <?php endforeach; ?>
+                    <option value="" disabled selected>Training Plan</option>
+                    <option value="1"> 12 sessions plan</option>
+                    <option value="2"> 30 sessions plan</option>
                 </select><br>
                 <input type="hidden" name="photo_path" id="photoPathInput">
                 <div id="dropzone-upload" class="dropzone"></div>

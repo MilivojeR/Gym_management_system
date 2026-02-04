@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'config.php';
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -18,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $admin = $results->fetch_assoc();
 
          if (password_verify($password, $admin['password'])) {
+            $_SESSION['admin_id'] = $admin['admin_id'];
              header("Location: admin_dashboard.php");
     } else {
         $_SESSION['error'] = "Low power levels detected. Access denied.";
@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     ?>
 <form action="" method="POST">
      Username: <input type="text" name="username"><br>
-    Password: <input type="password" name="password"><br>
+     Password: <input type="password" name="password"><br>
     <input type="submit" value="Login">
 </form>
 
