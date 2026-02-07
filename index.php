@@ -9,24 +9,27 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $run = $conn->prepare($sql);
     $run->bind_param("s", $username);
-    $run->execute();
 
     $results = $run->get_result();
+    $conn->close();
 
     if($results->num_rows == 1) {
         $admin = $results->fetch_assoc();
 
          if (password_verify($password, $admin['password'])) {
             $_SESSION['admin_id'] = $admin['admin_id'];
+            $conn->close();
              header("Location: admin_dashboard.php");
     } else {
         $_SESSION['error'] = "Low power levels detected. Access denied.";
+        $conn->close();
         header("Location: index.php");
         exit();
     }
      
     }else {
         $_SESSION['error'] = "Invalid username or password.";
+            $conn->close();
         header("Location: index.php");
         exit();
     }
