@@ -1,0 +1,17 @@
+[33mcommit 606a8d512d7127142ddc7c633ea6d39586f45ad7[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: MilivojeR <milivojeradovic@yahoo.com>
+Date:   Sat Feb 7 17:56:46 2026 +0100
+
+    Fix photo upload, Dropzone integration, PDF access card generation
+
+[33mcommit 003859a29f0a3d1a3b3b968c75ae3b7680cd8822[m
+Author: MilivojeR <milivojeradovic@yahoo.com>
+Date:   Wed Feb 4 22:24:46 2026 +0100
+
+    Fixed session handling and added dropzone upload
+
+[33mcommit 6d86c8568fc7de9e41733a5c273c81bdb8f88392[m
+Author: MilivojeR <milivojeradovic@yahoo.com>
+Date:   Wed Feb 4 21:34:20 2026 +0100
+
+    Initial commit - Gym Management System
