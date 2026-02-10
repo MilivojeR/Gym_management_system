@@ -9,7 +9,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $run = $conn->prepare($sql);
     $run->bind_param("s", $username);
-
+    $run->execute();
     $results = $run->get_result();
     $conn->close();
 
@@ -18,11 +18,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
          if (password_verify($password, $admin['password'])) {
             $_SESSION['admin_id'] = $admin['admin_id'];
-            $conn->close();
              header("Location: admin_dashboard.php");
     } else {
         $_SESSION['error'] = "Low power levels detected. Access denied.";
-        $conn->close();
         header("Location: index.php");
         exit();
     }

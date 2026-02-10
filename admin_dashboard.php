@@ -28,7 +28,69 @@ echo "Welcome to the Admin Dashboard!";
         ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
     <?php endif; ?>
+    <div class ="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Members List</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Trainer</th>
+                            <th>Photo</th>
+                            <th>Training Plan</th>
+                            <th>Access Card</th>
+                            <th>Created At</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbdody>
+                        <?php
+                        $sql="SELECT * from members";
+                        $results = $conn->query($sql);
+                        $results = $results->fetch_all(MYSQLI_ASSOC);
+
+                        foreach($results as $result) : ?>
+                        <tr>
+                            <td><?php echo $result['first_name']; ?></td>
+                            <td><?php echo $result['last_name']; ?></td>
+                            <td><?php echo $result['email']; ?></td>
+                            <td><?php echo $result['phone_number']; ?></td>
+                            <td><?php echo $result['trainer_id']; ?></td>
+                            <td><img src="<?php echo $result['photo_path']; ?>" width="100" height="100"></td>
+                            <td><?php 
+                            
+                            $plan_id=$result['training_plan_id'];
+                            $sql = "SELECT * FROM training_plans WHERE plan_id = ?";
+                            $run = $conn->prepare($sql);
+                            $run->bind_param("i", $plan_id);
+                            $run->execute();
+                            $results = $run->get_result();
+                            $results = $results->fetch_assoc();
+                            if($results) {
+                                echo $results['name'];
+                            } else {
+                                echo "No training plan assigned. Skinny b****";
+                            }
+                            
+                            ?></td>
+                            <td><a href="<?php echo $result['access_card_pdf_path']; ?>" target="_blank">Access Card</a></td>
+                            <td><?php
+                            
+                            $create_at=strtotime($result['created_at']);
+                            $new_date=date("m-d-Y", $create_at);
+                            echo $new_date;
+                            
+                            ?></td>
+                            <td><button>DELETE</button></td>
+                            </tr>
+                        <?php endforeach; 
+                        ?>
 <div class="container">
     <div class="row mb-5">
         <div class="col-md-6">
